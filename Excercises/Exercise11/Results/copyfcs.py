@@ -1,0 +1,12 @@
+import arcpy, os
+from arcpy import env
+try:
+    env.workspace = "G:\School\Personal Drive\Fall2014\Python\Excercises\Exercise11"
+    fclist = arcpy.ListFeatureClasses()
+    for fc in fclist:
+        desc = arcpy.Describe(fc)
+        arcpy.CopyFeatures_management(fc, os.path.join("Results/mydata.mdb", desc.basename))
+except arcpy.ExecuteError:
+    print arcpy.GetMessages(2)
+except:
+    print "There has been a nontool error."
